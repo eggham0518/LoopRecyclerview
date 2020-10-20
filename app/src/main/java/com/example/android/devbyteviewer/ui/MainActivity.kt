@@ -23,6 +23,8 @@ import com.example.android.devbyteviewer.R
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         setContentView(R.layout.activity_dev_byte_viewer)
     }
 }
