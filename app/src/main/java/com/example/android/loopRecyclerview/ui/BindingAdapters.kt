@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.devbyteviewer.util
+package com.example.android.loopRecyclerview.ui
 
 import android.os.Handler
 import android.view.View
@@ -25,12 +25,6 @@ fun hideIfNetworkError(view: View, isLoading: Boolean, datumlist: Any?) {
     if (isLoading) {
         view.visibility = View.VISIBLE
     } else {
-        Handler().postDelayed(Runnable { view.visibility = View.INVISIBLE }, 400)
-
+        view.visibility = View.GONE
     }
 }
-
-//@BindingAdapter("imageUrl")
-//fun setImageUrl(imageView: ImageView, url: String) {
-//    Glide.with(imageView.context).load(url).into(imageView)
-//}

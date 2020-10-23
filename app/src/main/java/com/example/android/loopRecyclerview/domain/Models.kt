@@ -14,43 +14,20 @@
  * limitations under the License.
  */
 
-package com.example.android.devbyteviewer.domain
+package com.example.android.loopRecyclerview.domain
 
-import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
-import androidx.room.TypeConverters
 import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-/**
- * Domain objects are plain Kotlin data classes that represent the things in our app. These are the
- * objects that should be displayed on screen, or manipulated by the app.
- *
- * @see database for objects that are mapped to the database
- * @see network for objects that parse or prepare network calls
- */
-
-/**
- * Videos represent a devbyte that can be played.
- */
 data class Datum(
-        val id : String,
+        val id : Int,
         val cmc_rank: Int,
         val name: String,
         val quote: Quote,
         val last_updated: String?
 )
-
-val gson = Gson()
-
-class QuotePersistentConverter {
-    @TypeConverter
-    fun storeRepoOwnerToString(data: Quote): String = gson.toJson(data)
-
-    @TypeConverter
-    fun storeStringToRepoOwner(value: String): Quote = gson.fromJson(value, Quote::class.java)
-}
 
 data class Quote(
         @SerializedName("USD")

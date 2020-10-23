@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package com.example.android.devbyteviewer
+package com.example.android.loopRecyclerview.ui
 
-import android.app.Application
-import timber.log.Timber
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.android.loopRecyclerview.R
 
-class CoinApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        Timber.plant(Timber.DebugTree())
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
     }
 }

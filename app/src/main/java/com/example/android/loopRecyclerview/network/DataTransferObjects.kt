@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package com.example.android.devbyteviewer.database
+package com.example.android.loopRecyclerview.network
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.example.android.devbyteviewer.domain.Datum
-import com.example.android.devbyteviewer.domain.Quote
+import com.example.android.loopRecyclerview.database.DatabaseDatum
+import com.example.android.loopRecyclerview.domain.Datum
+import com.example.android.loopRecyclerview.domain.Quote
+import com.squareup.moshi.JsonClass
 
-@Entity
-data class DatabaseDatum constructor(
-        @PrimaryKey
-        val id: String,
+@JsonClass(generateAdapter = true)
+data class NetworkDatumContainer(val data: List<NetworkDatum>)
+
+@JsonClass(generateAdapter = true)
+data class NetworkDatum(
+        val id: Int,
         val cmc_rank: Int,
         val name: String,
         val quote: Quote,
         val last_updated: String?
 )
 
-fun List<DatabaseDatum>.asDomainModel(): List<Datum> {
-    return map {
-        Datum(
-                id= it.id,
+fun NetworkDatumContainer.asDatabaseModel(): List<DatabaseDatum> {
+    return data.map {
+        DatabaseDatum(
+                id = it.id,
                 cmc_rank = it.cmc_rank,
                 name = it.name,
                 quote = it.quote,
@@ -42,4 +44,17 @@ fun List<DatabaseDatum>.asDomainModel(): List<Datum> {
         )
     }
 }
+
+fun NetworkDatumContainer.asDomainModel(): List<Datum> {
+    return data.map {
+        Datum(
+                id = it.id,
+                cmc_rank = it.cmc_rank,
+                name = it.name,
+                quote = it.quote,
+                last_updated = it.last_updated
+        )
+    }
+}
+
 

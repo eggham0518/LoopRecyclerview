@@ -1,4 +1,4 @@
-package com.example.android.devbyteviewer.util;
+package com.example.android.loopRecyclerview.util;
 
 import android.graphics.PointF;
 import android.view.View;
@@ -158,4 +158,6 @@ public class CoinSnapHelper extends LinearSnapHelper {
     public void setFlingSpeed(int flingSpeed) {
         this.flingSpeed = flingSpeed;
     }
+
+
 }

@@ -14,17 +14,25 @@
  * limitations under the License.
  */
 
-package com.example.android.devbyteviewer.ui
+package com.example.android.loopRecyclerview
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.android.devbyteviewer.R
+import android.app.Application
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+class CoinApplication : Application() {
+    val applicationScope = CoroutineScope(Dispatchers.Default)
 
+    override fun onCreate() {
+        super.onCreate()
+        delayedInit()
+    }
 
-        setContentView(R.layout.activity_dev_byte_viewer)
+    private fun delayedInit() {
+        applicationScope.launch {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }

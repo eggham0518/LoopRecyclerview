@@ -24,7 +24,7 @@
 
         <variable
             name="datum"
-            type="com.example.android.devbyteviewer.domain.Datum" />
+            type="com.example.android.loopRecyclerview.domain.Datum" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -37,9 +37,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             >
-
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/left_well"
                 android:layout_width="wrap_content"
@@ -57,7 +55,7 @@
 
 
             <ImageView
-                android:id="@+id/iv_logo"
+                android:id="@+id/ivLogo"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
@@ -66,6 +64,7 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:background="#fff"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
@@ -81,7 +80,7 @@
                 android:textColor="@color/text_black"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/left_well"
-                app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+                app:layout_constraintTop_toBottomOf="@+id/ivLogo"
                 tools:text="title" />
 
             <TextView
@@ -90,12 +89,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="16dp"
-                android:text="@{String.valueOf(datum.cmc_rank)}"
+                android:text="@{String.valueOf(datum.cmc_rank).trim()}"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
                 android:textColor="@color/text_black"
                 app:layout_constraintStart_toEndOf="@+id/title"
-                app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+                app:layout_constraintTop_toBottomOf="@+id/ivLogo"
                 tools:text="id" />
 
             <TextView

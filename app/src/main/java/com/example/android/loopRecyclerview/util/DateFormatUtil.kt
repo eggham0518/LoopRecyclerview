@@ -1,4 +1,4 @@
-package com.example.android.devbyteviewer.util
+package com.example.android.loopRecyclerview.util
 
 import java.text.SimpleDateFormat
 import java.util.*

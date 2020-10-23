@@ -14,28 +14,15 @@
  * limitations under the License.
  */
 
-package com.example.android.devbyteviewer.database
+package com.example.android.loopRecyclerview.database
 
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.android.devbyteviewer.domain.QuotePersistentConverter
+import com.example.android.loopRecyclerview.util.QuotePersistentConverter
+import com.google.gson.Gson
 
-@Dao
-interface DatumDao {
-    @Query("select * from databasedatum order by cmc_rank asc" )
-    fun getDatums(): LiveData<List<DatabaseDatum>>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(data: List<DatabaseDatum>)
-
-    @Database(entities = [DatabaseDatum::class], version = 1)
-    @TypeConverters(QuotePersistentConverter::class)
-    abstract class DatumsDatabase : RoomDatabase() {
-        abstract val datumDao: DatumDao
-    }
-}
-
+val gson = Gson()
 private lateinit var INSTANCE: DatumDao.DatumsDatabase
 
 fun getDatabase(context: Context): DatumDao.DatumsDatabase {
@@ -48,4 +35,21 @@ fun getDatabase(context: Context): DatumDao.DatumsDatabase {
     }
     return INSTANCE
 }
+
+@Dao
+interface DatumDao {
+    @Database(entities = [DatabaseDatum::class], version = 1)
+    @TypeConverters(QuotePersistentConverter::class)
+    abstract class DatumsDatabase : RoomDatabase() {
+        abstract val datumDao: DatumDao
+    }
+
+    @Query("select * from databasedatum order by cmc_rank asc" )
+    fun getDatums(): LiveData<List<DatabaseDatum>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(data: List<DatabaseDatum>)
+}
+
+
 

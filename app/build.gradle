@@ -23,7 +23,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 30
     defaultConfig {
-        applicationId "com.example.android.devbyteviewer"
+        applicationId "com.example.android.loopRecyclerview"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -112,5 +112,8 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
     implementation 'com.github.beksomega:loopinglayout:0.3.2'
+
+    implementation 'com.jakewharton:disklrucache:2.0.2'
+
 
 }

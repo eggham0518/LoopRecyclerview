@@ -14,44 +14,43 @@
  * limitations under the License.
  */
 
-package com.example.android.devbyteviewer.network
+package com.example.android.loopRecyclerview.network
 
+import com.google.gson.GsonBuilder
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.io.ByteArrayInputStream
 
-// Since we only have one service, this can all go in one file.
-// If you add more services, split this to multiple files and make sure to share the retrofit
-// object between services.
 
-/**
- * A retrofit service to fetch a devbyte playlist.
- */
 interface Service_pro {
     @Headers("X-CMC_PRO_API_KEY: 3069b872-06b0-40f1-bf44-5a3f7f73d796")
     @GET("/v1/cryptocurrency/listings/latest?")
     suspend fun getDatumlist(
             @Query("start") start: Int,
-            @Query("limit") limit : Int?
+            @Query("limit") limit: Int?
     ): NetworkDatumContainer
 }
 
 interface Service_s2 {
     @GET("/static/img/coins/64x64/{id}.png")
-    suspend fun getLogo(
-            @Path("id") id: String
-    ): NetworkDatumContainer
+     fun getLogo(
+            @Path("id") id: Int
+    ): Call<ResponseBody>
 }
 
-/**
- * Main entry point for network access. Call like `DevByteNetwork.devbytes.getPlaylist()`
- */
-object CoinNetwork {
+var gson = GsonBuilder()
+        .setLenient()
+        .create()
 
-    // Configure retrofit to parse JSON and use coroutines
+object CoinNetwork {
     private val retrofit_pro = Retrofit.Builder()
             .baseUrl("https://pro-api.coinmarketcap.com")
             .addConverterFactory(GsonConverterFactory.create())
@@ -59,11 +58,10 @@ object CoinNetwork {
 
     private val retrofit_s2 = Retrofit.Builder()
             .baseUrl("https://s2.coinmarketcap.com")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 
     val service_pro = retrofit_pro.create(Service_pro::class.java)
-    val service_s2 = retrofit_s2.create(Service_pro::class.java)
-
+    val service_s2 = retrofit_s2.create(Service_s2::class.java)
 }
 
